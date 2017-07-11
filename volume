@@ -1,0 +1,15 @@
+#!/bin/sh
+CHANNEL=Headphone
+VALUE=1
+killall xmessage
+case $1 in
+	down )
+		amixer -c 0 set $CHANNEL $VALUE- unmute | grep % | cut -d\  -f5 |xmessage -center -timeout 1 -buttons "" -file - &
+		;;
+	up )
+		amixer -c 0 set $CHANNEL $VALUE+ unmute | grep % | cut -d\  -f5 |xmessage -center -timeout 1 -buttons "" -file - &
+		;;
+	mute )
+		amixer -c 0 set $CHANNEL toggle | grep % | cut -d\  -f5 |xmessage -center -timeout 1 -buttons "" -file - &
+		;;
+esac
